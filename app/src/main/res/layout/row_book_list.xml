@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#ffffff"
+    android:layout_marginTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Most Read This Week In Horror "
+            android:textSize="12dp"
+            android:paddingTop="5dp"
+            android:paddingLeft="12dp"
+            android:textColor="#000000"/>
+
+        </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/row_book_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="15sp"
+        android:src="@drawable/shop"/>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="15dp">
+        <TextView
+            android:id="@+id/row_book_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. WhatsApp "
+            android:textSize="12dp"
+            android:paddingTop="5dp"
+            android:textColor="#000000"/>
+
+        <TextView
+            android:id="@+id/row_book_publisher_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WhatsApp Inc."
+            android:paddingTop="5dp"/>
+
+        <RatingBar
+            android:id="@+id/row_book_ratingbar"
+            style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="5"
+            android:isIndicator="true"
+            android:focusable="false"
+            android:clickable="false"
+            android:numStars="5"
+            android:paddingTop="5dp"/>
+
+        <TextView
+            android:id="@+id/row_book_price"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Free"
+            android:textSize="12dp"
+            android:textColor="#bec420"
+            android:paddingTop="5dp"
+            />
+    </LinearLayout>
+    </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
