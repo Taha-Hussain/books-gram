@@ -15,12 +15,12 @@ import org.json.JSONException;
 
 public class BooksJsonParser {
 
-    public ArrayList<Books> getParsedQuotes() {
+    public ArrayList<Books> getParsedBooks() {
         HttpService MyHttpService = new HttpService();
         ArrayList<Books> MyArraylist = new ArrayList<>();
 
 
-        String JsonQuotes = MyHttpService.httpGet();
+        String JsonQuotes = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php");
         try {
             JSONArray json = new JSONArray(JsonQuotes);
             for (int i = 0; i < json.length(); i++) {

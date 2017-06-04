@@ -15,6 +15,8 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import com.ticktech.booksgram.GenreActivity;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -107,11 +109,15 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClick_forgetPassword(View view) {
 
-        Intent mintent = new Intent(this, MainActivity.class);
-        startActivity(mintent);
+//        Intent mintent = new Intent(this, MainActivity.class);
+//        startActivity(mintent);
 
 //        Intent mintent = new Intent(this, ForgetPasswordActivity.class);
 //        startActivity(mintent);
+
+        Intent mintent = new Intent(this, GenreActivity.class);
+        startActivity(mintent);
+
 
     }
     private boolean isNetworkConnected() {

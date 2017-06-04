@@ -14,10 +14,12 @@ import java.io.IOException;
 
 public class HttpService {
 
-    public String httpGet() {
+    public String httpGet(String url) {
         String result="";
         final HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("http://friendsfashion.net/android/book/getBooksApi.php");
+
+        HttpGet httpGet = new HttpGet(url);
+//        HttpGet httpGet = new HttpGet("http://friendsfashion.net/android/book/getBooksApi.php");
         try {
             HttpResponse mHttpResponse = httpClient.execute(httpGet);
             result = EntityUtils.toString(mHttpResponse.getEntity());

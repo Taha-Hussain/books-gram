@@ -24,6 +24,7 @@
     <activity android:name=".RegisterActivity"  />
     <activity android:name=".ForgetPasswordActivity"></activity>
     <activity android:name=".MainActivity"></activity>
+    <activity android:name=".GenreActivity"></activity>
 
     <!--<activity-->
             <!--android:name=".MainActivity"-->

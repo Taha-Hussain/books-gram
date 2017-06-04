@@ -11,7 +11,7 @@ public class BookDatasource {
 
     public ArrayList<Books> getList() {
 
-        BooksJsonParser quotesParser = new BooksJsonParser();
-        return quotesParser.getParsedQuotes();
+        BooksJsonParser booksParser = new BooksJsonParser();
+        return booksParser.getParsedBooks();
     }
 }

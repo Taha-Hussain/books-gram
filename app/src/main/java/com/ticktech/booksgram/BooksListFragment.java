@@ -45,7 +45,7 @@ public class BooksListFragment extends Fragment {
         @Override
         protected void onPreExecute() {
             dialog.setTitle("Please wait...");
-            dialog.setMessage("Let The Fun Begin! ");
+            dialog.setMessage("Loading Books!");
             dialog.show();
             array_list = new ArrayList<>();
             bookDatasource = new BookDatasource();
