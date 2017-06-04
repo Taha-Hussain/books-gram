@@ -10,7 +10,6 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
-import com.ticktech.booksgram.GetBitmapFromUrl;
 import com.ticktech.booksgram.R;
 import com.ticktech.booksgram.model.Books;
 
@@ -31,7 +30,6 @@ public class BookAdapter extends ArrayAdapter<Books> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Books item = getItem(position);
-        GetBitmapFromUrl getBitmapFromUrl = new GetBitmapFromUrl();
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.row_book_list,parent,false);
@@ -47,9 +45,6 @@ public class BookAdapter extends ArrayAdapter<Books> {
         BookPrice.setText(item.getBook_price());
         BookPublisher.setText(item.getBook_publisher());
         Picasso.with(context).load(item.getBook_logo()).into(BookLogo);
-//        BookLogo.setImageBitmap(getBitmapFromUrl.getBitmapFromURL(item.getBook_logo()));
-//        BookLogo.setImageResource(context.getResources().getIdentifier("drawable/" + item.getBook_logo(), null, context.getPackageName()));
-
         return rowView;
     }
 }

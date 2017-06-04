@@ -184,21 +184,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void afterLoginProcess() {
-
-//        if (mRemember.isChecked()) {
-//
-//            SharedPreferences.Editor editor = mSharedPreferences.edit();
-//            editor.putString("key_userName", mEditTextUserName.getText().toString());
-//            editor.putString("key_password", mEditTextPassword.getText().toString());
-//            editor.commit();
-
-            // Intent mintent = new Intent(this, CarListsActivity.class);
-            //startActivity(mintent);
-//            showMessage("done");
         Intent mintent = new Intent(this, MainActivity.class);
         startActivity(mintent);
-            // finish();
-       // }
     }
 
     private void showMessage(String message) {

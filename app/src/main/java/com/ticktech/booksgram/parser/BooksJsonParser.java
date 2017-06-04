@@ -22,11 +22,7 @@ public class BooksJsonParser {
 
         String JsonQuotes = MyHttpService.httpGet();
         try {
-//            JSONArray jsonArray = new JSONArray(JsonQuotes);
             JSONArray json = new JSONArray(JsonQuotes);
-
-//            JSONObject jsonObject = new JSONObject(JsonQuotes);
-//            JSONArray quotesJsonArray = jsonObject.getJSONArray("quotations");
             for (int i = 0; i < json.length(); i++) {
                 Books books = new Books();
                 JSONObject MyJsonObject = json.getJSONObject(i);
@@ -37,11 +33,7 @@ public class BooksJsonParser {
                 books.setBook_publisher("by "+MyJsonObject.getString("bookAuthor"));
                 books.setBook_logo(MyJsonObject.getString("bookCoverImageUrl"));
                 books.setBook_price(MyJsonObject.getString("price"));
-
                 MyArraylist.add(books);
-
-
-
             }
         } catch (JSONException e) {
             e.printStackTrace();
