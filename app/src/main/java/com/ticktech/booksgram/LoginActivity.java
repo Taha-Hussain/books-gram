@@ -98,13 +98,20 @@ public class LoginActivity extends AppCompatActivity {
 
     public void onClick_Register(View view) {
 
+
         Intent mintent = new Intent(this, RegisterActivity.class);
         startActivity(mintent);
+
+
     }
 
     public void onClick_forgetPassword(View view) {
-        Intent mintent = new Intent(this, ForgetPasswordActivity.class);
+
+        Intent mintent = new Intent(this, MainActivity.class);
         startActivity(mintent);
+
+//        Intent mintent = new Intent(this, ForgetPasswordActivity.class);
+//        startActivity(mintent);
 
     }
     private boolean isNetworkConnected() {

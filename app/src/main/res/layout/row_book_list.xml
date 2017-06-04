@@ -36,9 +36,9 @@
         android:orientation="horizontal">
         <ImageView
             android:id="@+id/row_book_logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15sp"
+            android:layout_width="300px"
+            android:layout_height="500px"
+            android:padding="7sp"
         android:src="@drawable/shop"/>
 
 
@@ -46,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="25dp">
         <TextView
             android:id="@+id/row_book_name"
             android:layout_width="wrap_content"
@@ -61,7 +61,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="WhatsApp Inc."
-            android:paddingTop="5dp"/>
+            android:paddingTop="5dp"
+            android:textColor="#bababa"/>
 
         <RatingBar
             android:id="@+id/row_book_ratingbar"

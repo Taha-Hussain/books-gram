@@ -20,10 +20,6 @@ public class Books {
     public void setBook_description(String book_description) {
         this.book_description = book_description;
     }
-
-
-
-
     public int getBook_id() {
         return book_id;
     }
