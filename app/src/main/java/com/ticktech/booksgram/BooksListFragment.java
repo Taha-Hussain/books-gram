@@ -25,19 +25,9 @@ public class BooksListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //returning our layout file
-        //change R.layout.yourlayoutfilename for each of your fragments
         view = inflater.inflate(R.layout.fragment_books_list, container, false);
-//        ListView mListViewBooks = (ListView)view.findViewById(R.id.booklist_listview);
-//        BookDatasource mApplicationDatasource = new BookDatasource();
-//        array_list = mApplicationDatasource.getList();
-//        BookAdapter mBookAdapter = new BookAdapter(getActivity(),R.layout.row_book_list,array_list);
-//        mListViewBooks.setAdapter(mBookAdapter);
-
         new asyncTask_httpGet().execute();
-
         return view;
-//        return inflater.inflate(R.layout.fragment_books_list, container, false);
     }
 
 
@@ -66,8 +56,6 @@ public class BooksListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-//            String url ="http://friendsfashion.net/android/Crawler/quotesJson.php?category=";
-//            String Category_Name = intent.getStringExtra("Category_Name");
             array_list = bookDatasource.getList();
             return null;
         }
@@ -78,15 +66,8 @@ public class BooksListFragment extends Fragment {
             ListView mListViewBooks = (ListView) view.findViewById(R.id.booklist_listview);
             BookAdapter mBookAdapter = new BookAdapter(getActivity(), R.layout.row_book_list, array_list);
             mListViewBooks.setAdapter(mBookAdapter);
-
-
-//            listViewQuotes = (ListView) view.findViewById(R.id.quoteList_ListView);
-//            quotesAdapter = new QuotesAdapter(context,R.layout.row_quote_list, array_list);
-//            listViewQuotes.setAdapter(quotesAdapter);
             super.onPostExecute(s);
             dialog.dismiss();
-
-
         }
     }
 }
