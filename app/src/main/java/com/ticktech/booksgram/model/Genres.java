@@ -1,19 +1,45 @@
 package com.ticktech.booksgram.model;
 
+import android.widget.CheckBox;
+import android.widget.TextView;
+
 /**
  * Created by Taha on 04/06/2017.
  */
 
 public class Genres {
 
-    private int genere_id;
+    private String genere_id;
+    private CheckBox checkBox;
     private String genere_Name;
 
-    public int getGenere_id() {
+    private boolean isSelected;
+
+    public boolean isSelected() {
+        return isSelected;
+    }
+
+    public void setSelected(boolean selected) {
+        isSelected = selected;
+    }
+
+    public Genres() {}
+    public Genres(CheckBox checkBox ) {
+        this.checkBox = checkBox ;
+
+    }
+
+    public CheckBox getCheckBox() {
+        return checkBox;
+    }
+    public void setCheckBox(CheckBox checkBox) {
+        this.checkBox = checkBox;
+    }
+        public String getGenere_id() {
         return genere_id;
     }
 
-    public void setGenere_id(int genere_id) {
+    public void setGenere_id(String genere_id) {
         this.genere_id = genere_id;
     }
 
@@ -34,4 +60,6 @@ public class Genres {
     }
 
     private String status;
+
+
 }

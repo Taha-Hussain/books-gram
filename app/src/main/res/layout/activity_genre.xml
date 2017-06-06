@@ -8,7 +8,21 @@
     <ListView
         android:id="@+id/genrelist_listview"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent" />
+        android:layout_height="fill_parent"
+        android:layout_weight="80"/>
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/genrelist_listview"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--class="android.support.v7.widget.RecyclerView" />-->
+
+    <Button
+        android:id="@+id/selectGenreButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Done"
+        android:layout_weight="20"/>
 
 </LinearLayout>
 

@@ -1,5 +1,6 @@
 package com.ticktech.booksgram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        displaySelectedScreen(R.id.nav_camera);
+        displaySelectedScreen(R.id.nav_profile);
     }
 
     @Override
@@ -66,9 +67,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -108,8 +109,18 @@ public class MainActivity extends AppCompatActivity
 
         //initializing the fragment object which is selected
         switch (itemId) {
-            case R.id.nav_gallery:
+            case R.id.nav_bookList:
                 fragment = new BooksListFragment();
+                break;
+
+            case R.id.nav_profile:
+                fragment = new ProfileFragment();
+                break;
+
+            case R.id.nav_logout:
+                Intent mintent = new Intent(this, LoginActivity.class);
+                startActivity(mintent);
+//                fragment = new ProfileFragment();
                 break;
         }
 

@@ -12,6 +12,13 @@ public class Books {
     private String book_logo;
     private String book_price;
     private String book_description;
+    private String book_link;
+
+    private String book_publishYear;
+    private String book_shortDescription;
+    private String book_categoryName;
+
+
 
     public String getBook_description() {
         return book_description;
@@ -66,5 +73,37 @@ public class Books {
 
     public void setBook_price(String book_price) {
         this.book_price = book_price;
+    }
+
+    public String getBook_link() {
+        return book_link;
+    }
+
+    public void setBook_link(String book_link) {
+        this.book_link = book_link;
+    }
+
+    public String getBook_categoryName() {
+        return book_categoryName;
+    }
+
+    public void setBook_categoryName(String book_categoryName) {
+        this.book_categoryName = book_categoryName;
+    }
+
+    public String getBook_shortDescription() {
+        return book_shortDescription;
+    }
+
+    public void setBook_shortDescription(String book_shortDescription) {
+        this.book_shortDescription = book_shortDescription;
+    }
+
+    public String getBook_publishYear() {
+        return book_publishYear;
+    }
+
+    public void setBook_publishYear(String book_publishYear) {
+        this.book_publishYear = book_publishYear;
     }
 }

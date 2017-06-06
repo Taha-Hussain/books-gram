@@ -36,13 +36,13 @@ public class LoginActivity extends AppCompatActivity {
     EditText mEditTextUserName;
     EditText mEditTextPassword;
     RadioButton mRemember;
+    SharedPreferences mSharedPreferences;
+
 
     String mUserName;
     String mPassword;
-
     Context context;
 
-    SharedPreferences mSharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,40 +51,51 @@ public class LoginActivity extends AppCompatActivity {
 
         context = this;
 
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
+        init();
+        populate();
+    }
+
+    private void init() {
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (this);
         mEditTextUserName = (EditText) findViewById(R.id.login_Textview_userName);
         mEditTextPassword = (EditText) findViewById(R.id.login_Textview_password);
-
-       // populate();
     }
+
 
     public boolean populate() {
 
 
-        String strUserName = mSharedPreferences.getString("key_userName", "");
-        String strPassword = mSharedPreferences.getString("key_password", "");
+        String strUserName = mSharedPreferences.getString("key_email", "");
+//        String strPassword = mSharedPreferences.getString("key_password", "");
 
         mEditTextUserName.setText(strUserName);
-        mEditTextPassword.setText(strPassword);
+//        mEditTextPassword.setText(strPassword);
 
 
-        if (strPassword.length() > 0 && strUserName.length() > 0) {
-            //  Intent mintent = new Intent(context, CarListsActivity.class);
-            //startActivity(mintent);
-            finish();
-
-        } else {
-            showMessage("Please Login ");
-            return false;
-
-        }
+//        if (strPassword.length() > 0 && strUserName.length() > 0) {
+//            //  Intent mintent = new Intent(context, CarListsActivity.class);
+//            //startActivity(mintent);
+//            finish();
+//
+//        } else {
+//            showMessage("Please Login ");
+//            return false;
+//
+//        }
         return true;
+    }
+
+    private void savePreferences() {
+        SharedPreferences.Editor editor = mSharedPreferences.edit();
+        editor.putString("key_email", mEditTextUserName.getText().toString());
+        editor.commit();
     }
 
     public void onClick_login(View view) {
 
-        if (isValidate()) {
+       if (isValidate()) {
             mUserName = mEditTextUserName.getText().toString();
             mPassword = mEditTextPassword.getText().toString();
             if (isNetworkConnected()) {
@@ -112,11 +123,11 @@ public class LoginActivity extends AppCompatActivity {
 //        Intent mintent = new Intent(this, MainActivity.class);
 //        startActivity(mintent);
 
-//        Intent mintent = new Intent(this, ForgetPasswordActivity.class);
-//        startActivity(mintent);
-
-        Intent mintent = new Intent(this, GenreActivity.class);
+        Intent mintent = new Intent(this, ForgetPasswordActivity.class);
         startActivity(mintent);
+
+//        Intent mintent = new Intent(this, GenreActivity.class);
+//        startActivity(mintent);
 
 
     }
@@ -131,7 +142,7 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(LoginActivity.this, "Sending...", "wait", true);
+            progressDialog = ProgressDialog.show(LoginActivity.this, "Sending...", "Please Wait!", true);
 
             super.onPreExecute();
         }
@@ -158,7 +169,8 @@ public class LoginActivity extends AppCompatActivity {
             progressDialog.dismiss();
 //            showMessage(result);
             if (result.equals("\n200")) {
-                showMessage("Login sucess");
+                savePreferences();
+//                showMessage("Login sucess");
                 afterLoginProcess();
             } else {
                 showMessage("Invalid user/password");

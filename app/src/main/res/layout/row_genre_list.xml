@@ -2,24 +2,48 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
+    android:layout_marginTop="10dp"
     android:background="#ffffff"
-    android:layout_marginTop="10dp">
+    android:orientation="horizontal">
 
-        <CheckBox
-            android:id="@+id/row_genre_checkbox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="1. WhatsApp" />
 
-        <!--<TextView-->
-            <!--android:id="@+id/row_genre_name"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="50dp"-->
-            <!--android:text="1. WhatsApp "-->
-            <!--android:textSize="12dp"-->
-            <!--android:gravity="center"-->
-            <!--android:paddingLeft="10dp"-->
-            <!--android:textColor="#000000"/>-->
+    <CheckBox
+        android:id="@+id/row_genre_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text=""
+        />
+
+    <TextView
+        android:id="@+id/row_genreid_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:maxLines="1"
+        android:text=""
+        android:visibility="gone"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+    <TextView
+        android:id="@+id/row_genrename_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:maxLines="1"
+        android:text=""
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+
+
+    <!--<TextView-->
+    <!--android:id="@+id/row_genre_name"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="50dp"-->
+    <!--android:text="1. WhatsApp "-->
+    <!--android:textSize="12dp"-->
+    <!--android:gravity="center"-->
+    <!--android:paddingLeft="10dp"-->
+    <!--android:textColor="#000000"/>-->
 
 </LinearLayout>

@@ -20,9 +20,9 @@ public class BooksJsonParser {
         ArrayList<Books> MyArraylist = new ArrayList<>();
 
 
-        String JsonQuotes = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php");
+        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php");
         try {
-            JSONArray json = new JSONArray(JsonQuotes);
+            JSONArray json = new JSONArray(JsonBooks);
             for (int i = 0; i < json.length(); i++) {
                 Books books = new Books();
                 JSONObject MyJsonObject = json.getJSONObject(i);
@@ -33,6 +33,12 @@ public class BooksJsonParser {
                 books.setBook_publisher("by "+MyJsonObject.getString("bookAuthor"));
                 books.setBook_logo(MyJsonObject.getString("bookCoverImageUrl"));
                 books.setBook_price(MyJsonObject.getString("price"));
+                books.setBook_link(MyJsonObject.getString("amzaonLink"));
+                books.setBook_publishYear(MyJsonObject.getString("publishYear"));
+                books.setBook_shortDescription(MyJsonObject.getString("bookShorDescriptions"));
+                books.setBook_categoryName(MyJsonObject.getString("categoryName"));
+
+
                 MyArraylist.add(books);
             }
         } catch (JSONException e) {

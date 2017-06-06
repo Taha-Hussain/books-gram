@@ -21,19 +21,17 @@ public class GenresJsonParser {
         ArrayList<Genres> MyArraylist = new ArrayList<>();
 
 
-        String JsonQuotes = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php");
+        String JsonGenres = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php");
         try {
-            JSONArray json = new JSONArray(JsonQuotes);
+            JSONArray json = new JSONArray(JsonGenres);
             for (int i = 0; i < json.length(); i++) {
                 Genres genres = new Genres();
                 JSONObject MyJsonObject = json.getJSONObject(i);
 
-                genres.setGenere_id(Integer.parseInt(MyJsonObject.getString("id")));
+                genres.setGenere_id(MyJsonObject.getString("id"));
                 genres.setGenere_Name(MyJsonObject.getString("categoryName"));
-                genres.setStatus(MyJsonObject.getString("Status"));
-//                books.setBook_publisher("by "+MyJsonObject.getString("bookAuthor"));
-//                books.setBook_logo(MyJsonObject.getString("bookCoverImageUrl"));
-//                books.setBook_price(MyJsonObject.getString("price"));
+                genres.setStatus(MyJsonObject.getString("status"));
+                genres.setSelected(Boolean.parseBoolean(MyJsonObject.getString("selected")));
                 MyArraylist.add(genres);
             }
         } catch (JSONException e) {

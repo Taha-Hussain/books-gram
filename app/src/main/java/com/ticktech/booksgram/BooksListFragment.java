@@ -1,14 +1,18 @@
 package com.ticktech.booksgram;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.app.ProgressDialog;
+import android.widget.TextView;
 
 import com.ticktech.booksgram.model.BookDatasource;
 import com.ticktech.booksgram.model.Books;
@@ -26,6 +30,8 @@ public class BooksListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_books_list, container, false);
+
+
         new asyncTask_httpGet().execute();
         return view;
     }
