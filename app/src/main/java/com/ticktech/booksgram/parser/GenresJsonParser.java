@@ -28,10 +28,12 @@ public class GenresJsonParser {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
         String strEmail = mSharedPreferences.getString("key_email", "");
 
-        String JsonGenres = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php?email="+strEmail);
+        String JsonGenres = MyHttpService.httpGet("http://bookgram.000webhostapp.com/app/getBookCategory.php?email="+strEmail);
+//        String JsonGenres = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php?email="+strEmail);
         try {
             JSONArray json = new JSONArray(JsonGenres);
-            for (int i = 0; i < json.length(); i++) {
+            for (int i = 0; i < json.length(); i++)
+            {
                 Genres genres = new Genres();
                 JSONObject MyJsonObject = json.getJSONObject(i);
 

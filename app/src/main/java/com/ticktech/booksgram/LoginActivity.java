@@ -16,6 +16,9 @@ import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.ticktech.booksgram.GenreActivity;
+import com.ticktech.booksgram.model.FavGenreCountDatasource;
+import com.ticktech.booksgram.model.FavGenreDatasource;
+import com.ticktech.booksgram.model.Genres;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -37,6 +40,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText mEditTextPassword;
     RadioButton mRemember;
     SharedPreferences mSharedPreferences;
+
+    FavGenreCountDatasource favGenreCountDatasource;
 
 
     String mUserName;
@@ -168,7 +173,7 @@ public class LoginActivity extends AppCompatActivity {
             super.onPostExecute(result);
             progressDialog.dismiss();
 //            showMessage(result);
-            if (result.equals("\n200")) {
+            if (result.equals("200")) {
                 savePreferences();
 //                showMessage("Login sucess");
                 afterLoginProcess();
@@ -180,7 +185,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String loginRequestToWebServer(String mUserName, String mPassword) {
-        String url = "http://friendsfashion.net/android/book/login.php";
+//        http://friendsfashion.net/android/book/login.php
+//        String url = "http://friendsfashion.net/android/book/login.php";
+        String url = "http://bookgram.000webhostapp.com/app/login.php";
         String strResponse = "No response";
 
         HttpClient httpclient = new DefaultHttpClient();
@@ -202,8 +209,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void afterLoginProcess() {
-        Intent mintent = new Intent(this, MainActivity.class);
+
+        Intent mintent = new Intent(context, MainActivity.class);
         startActivity(mintent);
+
+//        new asyncTask_httpfavCategoriesCount().execute();
+
+
     }
 
     private void showMessage(String message) {
@@ -220,5 +232,38 @@ public class LoginActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+    public class asyncTask_httpfavCategoriesCount extends AsyncTask<Void, Void, Void> {
+
+        String count;
+        @Override
+        protected void onPreExecute() {
+            favGenreCountDatasource = new FavGenreCountDatasource();
+            super.onPreExecute();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            count = favGenreCountDatasource.getResult(context);
+//            count = favGenreCountDatasource.getResult(context);
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void s) {
+
+            if(count == "0") {
+                Intent mintent = new Intent(context, MainActivity.class);
+                startActivity(mintent);
+            }
+            else
+                {
+                Intent mintent = new Intent(context, Genres.class);
+                startActivity(mintent);
+                }
+//            Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+            super.onPostExecute(s);
+        }
+}
 
 }

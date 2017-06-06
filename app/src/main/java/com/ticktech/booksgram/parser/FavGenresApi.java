@@ -26,7 +26,9 @@ public class FavGenresApi {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
         String strEmail = mSharedPreferences.getString("key_email", "");
-        String genreCallResponse = MyHttpService.httpGet("http://friendsfashion.net/android/book/insertUpdateFavCategories.php?email="+strEmail+"&categoryIds="+genresStr);
+
+//        String genreCallResponse = MyHttpService.httpGet("http://friendsfashion.net/android/book/insertUpdateFavCategories.php?email="+strEmail+"&categoryIds="+genresStr);
+        String genreCallResponse = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/insertUpdateFavCategories.php?email="+strEmail+"&categoryIds="+genresStr);
 
         try {
             JSONArray json = new JSONArray(genreCallResponse);

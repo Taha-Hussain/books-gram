@@ -20,6 +20,7 @@ import com.ticktech.booksgram.R;
 import com.ticktech.booksgram.adapter.BookAdapter;
 import com.ticktech.booksgram.adapter.GenreAdapter;
 import com.ticktech.booksgram.model.BookDatasource;
+import com.ticktech.booksgram.model.FavGenreCsvDatasource;
 import com.ticktech.booksgram.model.FavGenreDatasource;
 import com.ticktech.booksgram.model.Genres;
 import com.ticktech.booksgram.model.GenresDatasource;
@@ -39,6 +40,7 @@ public class GenreActivity  extends AppCompatActivity {
     ArrayList<Genres> array_list;
     GenresDatasource genresDatasource;
     FavGenreDatasource favGenreDatasource;
+    FavGenreCsvDatasource favGenreCsvDatasource;
     String genresStr;
 
     GenreAdapter adapter;
@@ -50,6 +52,7 @@ public class GenreActivity  extends AppCompatActivity {
 
         context = this;
         new asyncTask_httpGet().execute();
+        new asyncTask_httpfavCategories().execute();
     }
 
     public class asyncTask_httpGet extends AsyncTask<Void, Void, Void> {
@@ -150,6 +153,26 @@ public class GenreActivity  extends AppCompatActivity {
 
     }
 
+    public class asyncTask_httpfavCategories extends AsyncTask<Void, Void, Void> {
 
+        String categoriesCsv;
+        @Override
+        protected void onPreExecute() {
+            favGenreCsvDatasource = new FavGenreCsvDatasource();
+            super.onPreExecute();
+        }
 
+        @Override
+        protected Void doInBackground(Void... params) {
+            categoriesCsv = favGenreCsvDatasource.getResult(context);
+
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void s) {
+
+            Toast.makeText(context,categoriesCsv,Toast.LENGTH_SHORT).show();
+            super.onPostExecute(s);
+        }
+    }
 }

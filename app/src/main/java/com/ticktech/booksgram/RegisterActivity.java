@@ -54,7 +54,7 @@ public class RegisterActivity extends AppCompatActivity {
         mEditTextName = (EditText) findViewById(R.id.register_Textview_name);
         mEditTextEmail = (EditText) findViewById(R.id.register_Textview_email);
         mEditTextPassword = (EditText) findViewById(R.id.register_Textview_password);
-        type = (Spinner) findViewById(R.id.spinner1);
+//        type = (Spinner) findViewById(R.id.spinner1);
 
        // populate();
     }
@@ -88,7 +88,7 @@ public class RegisterActivity extends AppCompatActivity {
             mUserName = mEditTextName.getText().toString();
             mPassword = mEditTextPassword.getText().toString();
             mEmail = mEditTextEmail.getText().toString();
-            mtype = type.getSelectedItem().toString();
+//            mtype = type.getSelectedItem().toString();
 
             if (isNetworkConnected()) {
                 new RegisterActivity.asyncTask_RegisterRequest().execute();
@@ -128,7 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
                 if (mUserName.length() > -0 && mPassword.length() > -0) {
 
 
-                    msg = loginRequestToWebServer(mUserName, mPassword,mtype,mEmail);
+                    msg = loginRequestToWebServer(mUserName, mPassword,"2",mEmail);
 
                 }
             } catch (Exception ex) {
@@ -141,10 +141,10 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if (result.equals("\n400")) {
+            if (result.equals("400")) {
                 showMessage("This User Already Registred");
                 afterRegisterProcess();
-            } else if (result.equals("\n201")){
+            } else if (result.equals("201")){
 
                 showMessage("Register Success");
             }
@@ -152,7 +152,11 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public String loginRequestToWebServer(String mUserName, String mPassword , String mtype, String mEmail) {
-        String url = "http://friendsfashion.net/android/book/register.php";
+
+//        String url = "http://friendsfashion.net/android/book/register.php";
+        String url = "http://bookgram.000webhostapp.com/app/register.php";
+
+
         String strResponse = "No response";
 
         HttpClient httpclient = new DefaultHttpClient();

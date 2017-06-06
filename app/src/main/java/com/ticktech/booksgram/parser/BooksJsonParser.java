@@ -27,7 +27,10 @@ public class BooksJsonParser {
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
         String strEmail = mSharedPreferences.getString("key_email", "");
 
-        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php?email="+strEmail);
+
+
+        String JsonBooks = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
+//        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php?email="+strEmail);
         try {
             JSONArray json = new JSONArray(JsonBooks);
             for (int i = 0; i < json.length(); i++) {

@@ -103,7 +103,7 @@ public class ForgetPasswordActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if (result.equals("\n200")) {
+            if (result.equals("200")) {
                 showMessage("Your New Password Has been Sent To your Email Address.");
                 afterLoginProcess();
             } else {
@@ -114,7 +114,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
     }
 
     public String loginRequestToWebServer(String mEmail) {
-        String url = "http://friendsfashion.net/android/book/forgetPassword.php";
+
+        String url = "http://bookgram.000webhostapp.com/app/forgetPassword.php";
+//      String url = "http://friendsfashion.net/android/book/forgetPassword.php";
         String strResponse = "No response";
 
         HttpClient httpclient = new DefaultHttpClient();
