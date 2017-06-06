@@ -1,5 +1,7 @@
 package com.ticktech.booksgram.model;
 
+import android.content.Context;
+
 import com.ticktech.booksgram.parser.BooksJsonParser;
 
 import java.util.ArrayList;
@@ -9,9 +11,9 @@ import java.util.ArrayList;
  */
 public class BookDatasource {
 
-    public ArrayList<Books> getList() {
+    public ArrayList<Books> getList(Context context) {
 
         BooksJsonParser booksParser = new BooksJsonParser();
-        return booksParser.getParsedBooks();
+        return booksParser.getParsedBooks(context);
     }
 }

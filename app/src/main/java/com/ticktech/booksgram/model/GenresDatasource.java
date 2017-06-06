@@ -1,5 +1,7 @@
 package com.ticktech.booksgram.model;
 
+import android.content.Context;
+
 import com.ticktech.booksgram.parser.BooksJsonParser;
 import com.ticktech.booksgram.parser.GenresJsonParser;
 
@@ -10,9 +12,9 @@ import java.util.ArrayList;
  */
 public class GenresDatasource {
 
-    public ArrayList<Genres> getList() {
+    public ArrayList<Genres> getList(Context context) {
 
         GenresJsonParser genresParser = new GenresJsonParser();
-        return genresParser.getParsedGenres();
+        return genresParser.getParsedGenres(context);
     }
 }

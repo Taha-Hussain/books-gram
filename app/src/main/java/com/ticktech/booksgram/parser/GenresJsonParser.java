@@ -1,5 +1,9 @@
 package com.ticktech.booksgram.parser;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.ticktech.booksgram.model.Books;
 import com.ticktech.booksgram.model.Genres;
 import com.ticktech.booksgram.service.HttpService;
@@ -16,12 +20,15 @@ import java.util.ArrayList;
 
 public class GenresJsonParser {
 
-    public ArrayList<Genres> getParsedGenres() {
+    SharedPreferences mSharedPreferences;
+    public ArrayList<Genres> getParsedGenres(Context context) {
         HttpService MyHttpService = new HttpService();
         ArrayList<Genres> MyArraylist = new ArrayList<>();
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
+        String strEmail = mSharedPreferences.getString("key_email", "");
 
-        String JsonGenres = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php");
+        String JsonGenres = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBookCategory.php?email="+strEmail);
         try {
             JSONArray json = new JSONArray(JsonGenres);
             for (int i = 0; i < json.length(); i++) {

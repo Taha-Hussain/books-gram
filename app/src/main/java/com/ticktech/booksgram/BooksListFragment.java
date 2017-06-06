@@ -1,5 +1,6 @@
 package com.ticktech.booksgram;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -25,13 +26,14 @@ public class BooksListFragment extends Fragment {
     ArrayList<Books> array_list;
     BookDatasource bookDatasource;
     View view;
+    Context context;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_books_list, container, false);
 
-
+        context = getActivity();
         new asyncTask_httpGet().execute();
         return view;
     }
@@ -62,7 +64,7 @@ public class BooksListFragment extends Fragment {
 
         @Override
         protected Void doInBackground(Void... params) {
-            array_list = bookDatasource.getList();
+            array_list = bookDatasource.getList(context);
             return null;
         }
 

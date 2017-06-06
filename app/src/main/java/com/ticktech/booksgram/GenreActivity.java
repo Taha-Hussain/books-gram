@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -19,8 +20,10 @@ import com.ticktech.booksgram.R;
 import com.ticktech.booksgram.adapter.BookAdapter;
 import com.ticktech.booksgram.adapter.GenreAdapter;
 import com.ticktech.booksgram.model.BookDatasource;
+import com.ticktech.booksgram.model.FavGenreDatasource;
 import com.ticktech.booksgram.model.Genres;
 import com.ticktech.booksgram.model.GenresDatasource;
+import com.ticktech.booksgram.parser.FavGenresApi;
 
 import java.util.ArrayList;
 
@@ -35,13 +38,15 @@ public class GenreActivity  extends AppCompatActivity {
     Context context;
     ArrayList<Genres> array_list;
     GenresDatasource genresDatasource;
+    FavGenreDatasource favGenreDatasource;
+    String genresStr;
+
     GenreAdapter adapter;
     StringBuffer sb=null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genre);
-
 
         context = this;
         new asyncTask_httpGet().execute();
@@ -59,35 +64,22 @@ public class GenreActivity  extends AppCompatActivity {
             array_list = new ArrayList<>();
             genresDatasource = new GenresDatasource();
 
-
             super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            array_list = genresDatasource.getList();
+            array_list = genresDatasource.getList(context);
             return null;
         }
 
         @Override
         protected void onPostExecute(Void s) {
 
-
-            //RECYCLER
-//            RecyclerView rv= (RecyclerView) findViewById(R.id.genrelist_listview);
-//            rv.setLayoutManager(new LinearLayoutManager(context));
-//            rv.setItemAnimator(new DefaultItemAnimator());
-//            adapter=new GenreAdapter(context,array_list);
-//            //SET ADAPTER
-//            rv.setAdapter(adapter);
-
-
             ListView mListViewBooks = (ListView) findViewById(R.id.genrelist_listview);
+
             final GenreAdapter mGenresAdapter = new GenreAdapter(context, R.layout.row_genre_list, array_list);
             mListViewBooks.setAdapter(mGenresAdapter);
-
-
-//            adapter=new GenreAdapter(context,R.layout.row_genre_list,array_list);
 
             Button button = (Button) findViewById(R.id.selectGenreButton);
             button.setOnClickListener(new View.OnClickListener() {
@@ -106,20 +98,58 @@ public class GenreActivity  extends AppCompatActivity {
                     {
                         sb.deleteCharAt(sb.length() - 1);
                         Toast.makeText(context,sb.toString(),Toast.LENGTH_SHORT).show();
+                        genresStr = sb.toString();
+                        asyncTask_httpfavCategories asyncTask =new asyncTask_httpfavCategories();
+                        asyncTask.execute();
+
+//
+//                Intent mintent = new Intent(context, MainActivity.class);
+//                mintent.putExtra("favCategories",sb.toString());
+//                startActivity(mintent);
+//
+                        Intent mintent = new Intent(context, MainActivity.class);
+                        startActivity(mintent);
+
+
                     }else
                     {
                         Toast.makeText(context,"Please Check Categories",Toast.LENGTH_SHORT).show();
                     }
-
-
-//                Intent mintent = new Intent(context, MainActivity.class);
-//                startActivity(mintent);
                 }
             });
 
 
             super.onPostExecute(s);
             dialog.dismiss();
+
         }
+
+
+
+        public class asyncTask_httpfavCategories extends AsyncTask<Void, Void, Void> {
+
+            String response;
+            @Override
+            protected void onPreExecute() {
+                favGenreDatasource = new FavGenreDatasource();
+                super.onPreExecute();
+            }
+
+            @Override
+            protected Void doInBackground(Void... params) {
+                response = favGenreDatasource.getResult(genresStr,context);
+                return null;
+            }
+            @Override
+            protected void onPostExecute(Void s) {
+
+                Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
+                super.onPostExecute(s);
+            }
+        }
+
     }
+
+
+
 }

@@ -1,5 +1,9 @@
 package com.ticktech.booksgram.parser;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.ticktech.booksgram.model.Books;
 import com.ticktech.booksgram.service.HttpService;
 
@@ -15,12 +19,15 @@ import org.json.JSONException;
 
 public class BooksJsonParser {
 
-    public ArrayList<Books> getParsedBooks() {
+    SharedPreferences mSharedPreferences;
+    public ArrayList<Books> getParsedBooks(Context context) {
         HttpService MyHttpService = new HttpService();
         ArrayList<Books> MyArraylist = new ArrayList<>();
 
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
+        String strEmail = mSharedPreferences.getString("key_email", "");
 
-        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php");
+        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php?email="+strEmail);
         try {
             JSONArray json = new JSONArray(JsonBooks);
             for (int i = 0; i < json.length(); i++) {
