@@ -49,7 +49,6 @@ public class GenreActivity  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genre);
-
         context = this;
         new asyncTask_httpGet().execute();
         new asyncTask_httpfavCategories().execute();
@@ -100,7 +99,7 @@ public class GenreActivity  extends AppCompatActivity {
                     if(mGenresAdapter.checkedGenres.size()>0)
                     {
                         sb.deleteCharAt(sb.length() - 1);
-                        Toast.makeText(context,sb.toString(),Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(context,sb.toString(),Toast.LENGTH_SHORT).show();
                         genresStr = sb.toString();
                         asyncTask_httpfavCategories asyncTask =new asyncTask_httpfavCategories();
                         asyncTask.execute();
@@ -171,7 +170,7 @@ public class GenreActivity  extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void s) {
 
-            Toast.makeText(context,categoriesCsv,Toast.LENGTH_SHORT).show();
+//            Toast.makeText(context,categoriesCsv,Toast.LENGTH_SHORT).show();
             super.onPostExecute(s);
         }
     }
