@@ -9,6 +9,8 @@
         android:id="@+id/genrelist_listview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:transcriptMode="alwaysScroll"
+        android:stackFromBottom="true"
         android:layout_weight="80"/>
     <!--<android.support.v7.widget.RecyclerView-->
         <!--android:id="@+id/genrelist_listview"-->
