@@ -3,38 +3,48 @@ package com.ticktech.booksgram.parser;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
-import com.ticktech.booksgram.service.HttpService;
-
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
-/**
- * Created by Taha on 04/06/2017.
- */
 
 public class FavGenresCountApi {
 
-    SharedPreferences mSharedPreferences;
-    public String callGenresCount(Context context) {
-        HttpService MyHttpService = new HttpService();
-        String response = "";
+   static SharedPreferences mSharedPreferences;
+    public static String callGenresCount(Context context) {
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
         String strEmail = mSharedPreferences.getString("key_email", "");
 
+
+        HttpClient httpClient = new DefaultHttpClient();
+//        HttpGet httpGet = new HttpGet("https://bookgram.000webhostapp.com/app/getUserCategories.php?email="+strEmail);
+        HttpGet httpGet = new HttpGet("http://192.168.8.103:81/CheckBoxListView/getUserCategoriesCount.php?email="+strEmail);
+
+        String response = "";
+
+
 //        String genreCallResponse = MyHttpService.httpGet("http://friendsfashion.net/android/book/getUserCategories.php?email="+strEmail);
-        String genreCallResponse = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getUserCategories.php?email="+strEmail);
+//        String genreCallResponse = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getUserCategories.php?email="+strEmail);
 
         try {
-            JSONArray json = new JSONArray(genreCallResponse);
-            for (int i = 0; i < json.length(); i++) {
-                JSONObject MyJsonObject = json.getJSONObject(i);
-                response = MyJsonObject.getString("count");
-            }
+            HttpResponse httpResponse = httpClient.execute(httpGet);
+            response = EntityUtils.toString(httpResponse.getEntity());
+
+//            JSONArray json = new JSONArray(genreCallResponse);
+
+//            response = EntityUtils.toString(httpResponse.getEntity());
+
+//            for (int i = 0; i < json.length(); i++) {
+//                JSONObject MyJsonObject = json.getJSONObject(i);
+//                response = MyJsonObject.getString("count");
+//            }
         }
-        catch (JSONException e) {
+        catch (Exception e) {
             e.printStackTrace();
         }
 

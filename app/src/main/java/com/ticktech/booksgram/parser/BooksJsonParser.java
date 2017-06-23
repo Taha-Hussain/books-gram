@@ -3,35 +3,35 @@ package com.ticktech.booksgram.parser;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.ticktech.booksgram.model.Books;
-import com.ticktech.booksgram.service.HttpService;
-
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
-import org.json.JSONException;
 
-/**
- * Created by Taha on 04/06/2017.
- */
 
 public class BooksJsonParser {
 
     SharedPreferences mSharedPreferences;
     public ArrayList<Books> getParsedBooks(Context context) {
-        HttpService MyHttpService = new HttpService();
+//        HttpService MyHttpService = new HttpService();
         ArrayList<Books> MyArraylist = new ArrayList<>();
 
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences (context);
         String strEmail = mSharedPreferences.getString("key_email", "");
 
+        HttpClient httpClient = new DefaultHttpClient();
+        HttpGet httpGet = new HttpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
 
-
-        String JsonBooks = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
+//        String JsonBooks = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
 //        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php?email="+strEmail);
         try {
+            HttpResponse httpResponse = httpClient.execute(httpGet);
+            String JsonBooks = EntityUtils.toString(httpResponse.getEntity());
             JSONArray json = new JSONArray(JsonBooks);
             for (int i = 0; i < json.length(); i++) {
                 Books books = new Books();
@@ -51,7 +51,7 @@ public class BooksJsonParser {
 
                 MyArraylist.add(books);
             }
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

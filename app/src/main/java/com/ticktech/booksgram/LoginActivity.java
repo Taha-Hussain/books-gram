@@ -14,12 +14,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
-
-import com.ticktech.booksgram.GenreActivity;
-import com.ticktech.booksgram.model.FavGenreCountDatasource;
-import com.ticktech.booksgram.model.FavGenreDatasource;
-import com.ticktech.booksgram.model.Genres;
-
+import com.ticktech.booksgram.parser.FavGenresCountApi;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
@@ -40,10 +35,6 @@ public class LoginActivity extends AppCompatActivity {
     EditText mEditTextPassword;
     RadioButton mRemember;
     SharedPreferences mSharedPreferences;
-
-    FavGenreCountDatasource favGenreCountDatasource;
-
-
     String mUserName;
     String mPassword;
     Context context;
@@ -53,11 +44,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
         context = this;
-
-//        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         init();
         populate();
     }
@@ -70,25 +57,8 @@ public class LoginActivity extends AppCompatActivity {
 
 
     public boolean populate() {
-
-
         String strUserName = mSharedPreferences.getString("key_email", "");
-//        String strPassword = mSharedPreferences.getString("key_password", "");
-
         mEditTextUserName.setText(strUserName);
-//        mEditTextPassword.setText(strPassword);
-
-
-//        if (strPassword.length() > 0 && strUserName.length() > 0) {
-//            //  Intent mintent = new Intent(context, CarListsActivity.class);
-//            //startActivity(mintent);
-//            finish();
-//
-//        } else {
-//            showMessage("Please Login ");
-//            return false;
-//
-//        }
         return true;
     }
 
@@ -105,50 +75,32 @@ public class LoginActivity extends AppCompatActivity {
             mPassword = mEditTextPassword.getText().toString();
             if (isNetworkConnected()) {
                 new asyncTask_loginRequest().execute();
-            } else {
+            } else
+                {
                 showMessage("Please Check Internet Connection");
             }
-
         }
-
-
     }
 
     public void onClick_Register(View view) {
-
-
         Intent mintent = new Intent(this, RegisterActivity.class);
         startActivity(mintent);
-
-
     }
 
     public void onClick_forgetPassword(View view) {
-
-//        Intent mintent = new Intent(this, MainActivity.class);
-//        startActivity(mintent);
-
         Intent mintent = new Intent(this, ForgetPasswordActivity.class);
         startActivity(mintent);
-
-//        Intent mintent = new Intent(this, GenreActivity.class);
-//        startActivity(mintent);
-
-
     }
     private boolean isNetworkConnected() {
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-
         return cm.getActiveNetworkInfo() != null;
     }
 
     private class asyncTask_loginRequest extends AsyncTask<Void, Void, String> {
         ProgressDialog progressDialog;
-
         @Override
         protected void onPreExecute() {
-            progressDialog = ProgressDialog.show(LoginActivity.this, "Sending...", "Please Wait!", true);
-
+            progressDialog = ProgressDialog.show(LoginActivity.this, "Signing In...", "Please Wait!", true);
             super.onPreExecute();
         }
 
@@ -156,11 +108,8 @@ public class LoginActivity extends AppCompatActivity {
         protected String doInBackground(Void... params) {
             String msg = "";
             try {
-                if (mUserName.length() > -0 && mPassword.length() > -0) {
-
-
+                if (mUserName.length() > 0 && mPassword.length() > 0) {
                     msg = loginRequestToWebServer(mUserName, mPassword);
-
                 }
             } catch (Exception ex) {
                 msg = "Error :" + ex.getMessage();
@@ -172,11 +121,9 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-//            showMessage(result);
             if (result.equals("200")) {
                 savePreferences();
-//                showMessage("Login sucess");
-                afterLoginProcess();
+                new asyncTask_httpfavCategoriesCount().execute();
             } else {
                 showMessage("Invalid user/password");
             }
@@ -185,11 +132,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public String loginRequestToWebServer(String mUserName, String mPassword) {
-//        http://friendsfashion.net/android/book/login.php
 //        String url = "http://friendsfashion.net/android/book/login.php";
         String url = "http://bookgram.000webhostapp.com/app/login.php";
         String strResponse = "No response";
-
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(url);
         try {
@@ -207,17 +152,6 @@ public class LoginActivity extends AppCompatActivity {
         }
         return strResponse;
     }
-
-    public void afterLoginProcess() {
-
-        Intent mintent = new Intent(context, MainActivity.class);
-        startActivity(mintent);
-
-//        new asyncTask_httpfavCategoriesCount().execute();
-
-
-    }
-
     private void showMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -239,31 +173,29 @@ public class LoginActivity extends AppCompatActivity {
         String count;
         @Override
         protected void onPreExecute() {
-            favGenreCountDatasource = new FavGenreCountDatasource();
             super.onPreExecute();
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-            count = favGenreCountDatasource.getResult(context);
-//            count = favGenreCountDatasource.getResult(context);
+            count = FavGenresCountApi.callGenresCount(context);
             return null;
         }
         @Override
         protected void onPostExecute(Void s) {
 
-            if(count == "0") {
-                Intent mintent = new Intent(context, MainActivity.class);
+            if(count.equals("0")) {
+                Intent mintent = new Intent(context, GenreActivity.class);
                 startActivity(mintent);
             }
             else
                 {
-                Intent mintent = new Intent(context, Genres.class);
-                startActivity(mintent);
+                    Intent mintent = new Intent(context, MainActivity.class);
+                    startActivity(mintent);
+                    finish();
                 }
-//            Toast.makeText(context,response,Toast.LENGTH_SHORT).show();
             super.onPostExecute(s);
         }
-}
+    }
 
 }

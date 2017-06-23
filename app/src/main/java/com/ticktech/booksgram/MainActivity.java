@@ -2,13 +2,9 @@ package com.ticktech.booksgram;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -17,11 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.ticktech.booksgram.model.BookDatasource;
-import com.ticktech.booksgram.model.FavGenreDatasource;
-import com.ticktech.booksgram.parser.FavGenresApi;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -138,6 +129,7 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_logout:
                 Intent mintent = new Intent(this, LoginActivity.class);
                 startActivity(mintent);
+                finish();
 //                fragment = new ProfileFragment();
                 break;
         }

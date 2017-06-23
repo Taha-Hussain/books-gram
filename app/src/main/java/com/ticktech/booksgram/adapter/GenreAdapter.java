@@ -21,6 +21,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.ticktech.booksgram.parser.FavouriteGenresJsonParser.selectedCategories;
+
 /**
  * Created by Taha on 18/03/2016.
  */
@@ -66,22 +68,34 @@ public class GenreAdapter  extends ArrayAdapter<Genres> {
                     list.get(getPosition).setSelected(buttonView.isChecked()); // Set the value of checkbox to maintain its state.
 
 
-                    if(buttonView.isChecked())
-                    {
+//                    if(buttonView.isChecked())
+//                    {
+//
+//                        int a = checkedGenres.indexOf(list.get(getPosition));
+//                        if(a == -1)
+//                        {
+//                            checkedGenres.add(list.get(getPosition));
+//                        }
+//
+//
+////                        Toast.makeText(context, "Checked : " + list.get(getPosition).getGenere_id(), Toast.LENGTH_SHORT).show();
+//                    }
+//                    else
+//                    {
+//                        checkedGenres.remove(list.get(getPosition));
+////                        Toast.makeText(context, "Unchecked : " + list.get(getPosition).getGenere_id(), Toast.LENGTH_SHORT).show();
+//                    }
 
-                        int a = checkedGenres.indexOf(list.get(getPosition));
-                        if(a == -1)
-                        {
-                            checkedGenres.add(list.get(getPosition));
+                    if (buttonView.isChecked()) {
+                        if (!selectedCategories.contains(String.valueOf(list.get(getPosition).getGenere_id()))){
+                            selectedCategories.add(String.valueOf(list.get(getPosition).getGenere_id()));
                         }
-
-
-//                        Toast.makeText(context, "Checked : " + list.get(getPosition).getGenere_id(), Toast.LENGTH_SHORT).show();
                     }
-                    else
-                    {
-                        checkedGenres.remove(list.get(getPosition));
-//                        Toast.makeText(context, "Unchecked : " + list.get(getPosition).getGenere_id(), Toast.LENGTH_SHORT).show();
+                    else {
+                        if (selectedCategories.contains(String.valueOf(list.get(getPosition).getGenere_id())))
+                        {
+                            selectedCategories.remove(String.valueOf(list.get(getPosition).getGenere_id()));
+                        }
                     }
 
                 }
@@ -93,7 +107,6 @@ public class GenreAdapter  extends ArrayAdapter<Genres> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         viewHolder.genreCb.setTag(position); // This line is important.
-
         viewHolder.genreName.setText(list.get(position).getGenere_Name());
         viewHolder.genreCb.setChecked(list.get(position).isSelected());
 
