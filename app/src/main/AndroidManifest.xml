@@ -25,6 +25,7 @@
     <activity android:name=".ForgetPasswordActivity"></activity>
     <activity android:name=".MainActivity"></activity>
     <activity android:name=".GenreActivity"></activity>
+    <activity android:name=".BookDetailActivity"></activity>
 
     <!--<activity-->
             <!--android:name=".MainActivity"-->

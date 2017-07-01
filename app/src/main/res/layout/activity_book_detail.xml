@@ -1,0 +1,111 @@
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/profile"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book Title"
+        android:layout_gravity="center_horizontal"
+        android:textSize="30dp"
+        android:paddingTop="10dp" />
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Written By"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        android:paddingTop="10dp" >
+        <RatingBar
+            android:id="@+id/book_ratingbar_output" style="?android:attr/ratingBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:rating="5"
+            android:isIndicator="true"
+            android:focusable="false"
+            android:clickable="false"
+            android:numStars="5"
+            />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3.9"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="(9999 ratings)"
+            android:paddingLeft="10dp"
+            android:layout_gravity="center_horizontal"
+            />
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Want To Read"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center_horizontal"/>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:layout_gravity="center_horizontal"-->
+        <!--android:paddingTop="10dp"-->
+        <!--android:paddingBottom="10dp">-->
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Rate This Book"
+            android:paddingRight="10dp"
+            android:layout_gravity="center_horizontal"
+            />
+        <RatingBar
+            android:id="@+id/book_ratingbar_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:stepSize="1.0"
+            android:layout_gravity="center_horizontal"
+            android:numStars="5"
+            />
+    <!--</LinearLayout>-->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Short Discription"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp"
+        android:textSize="15dp"
+        android:layout_gravity="center_horizontal"
+        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+    <ImageView
+        android:id="@+id/row_share_button"
+        android:layout_width="250px"
+        android:layout_height="150px"
+        android:src="@drawable/share_button"
+        android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>

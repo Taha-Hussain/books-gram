@@ -126,6 +126,9 @@ public class MainActivity extends AppCompatActivity
                 fragment = new ProfileFragment();
                 break;
 
+            case R.id.nav_settings:
+                break;
+
             case R.id.nav_logout:
                 Intent mintent = new Intent(this, LoginActivity.class);
                 startActivity(mintent);

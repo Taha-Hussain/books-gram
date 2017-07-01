@@ -3,6 +3,9 @@ package com.ticktech.booksgram.parser;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.ticktech.booksgram.R;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
@@ -23,7 +26,8 @@ public class FavGenresCountApi {
 
         HttpClient httpClient = new DefaultHttpClient();
 //        HttpGet httpGet = new HttpGet("https://bookgram.000webhostapp.com/app/getUserCategories.php?email="+strEmail);
-        HttpGet httpGet = new HttpGet("http://192.168.8.103:81/CheckBoxListView/getUserCategoriesCount.php?email="+strEmail);
+        String rootUrl = context.getResources().getString(R.string.server_url);
+        HttpGet httpGet = new HttpGet(rootUrl+"getUserCategoriesCount.php?email="+strEmail);
 
         String response = "";
 

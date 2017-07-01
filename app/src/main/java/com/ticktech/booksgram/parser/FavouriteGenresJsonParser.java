@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import com.ticktech.booksgram.R;
 import com.ticktech.booksgram.model.Books;
 import com.ticktech.booksgram.model.Genres;
 //import com.ticktech.booksgram.service.HttpService;
@@ -32,7 +33,8 @@ public class FavouriteGenresJsonParser {
         String JsonFavouriteGenres = "";
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpGet httpGet = new HttpGet("http://192.168.8.103:81/CheckBoxListView/getFavouriteCategories.php?email="+strEmail);
+        String rootUrl = context.getResources().getString(R.string.server_url);
+        HttpGet httpGet = new HttpGet(rootUrl+"getFavouriteCategories.php?email="+strEmail);
         try {
             HttpResponse httpResponse = httpClient.execute(httpGet);
             JsonFavouriteGenres = EntityUtils.toString(httpResponse.getEntity());

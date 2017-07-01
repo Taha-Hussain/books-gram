@@ -3,6 +3,8 @@ package com.ticktech.booksgram.parser;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+
+import com.ticktech.booksgram.R;
 import com.ticktech.booksgram.model.Books;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
@@ -25,7 +27,10 @@ public class BooksJsonParser {
         String strEmail = mSharedPreferences.getString("key_email", "");
 
         HttpClient httpClient = new DefaultHttpClient();
-        HttpGet httpGet = new HttpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
+
+        String rootUrl = context.getResources().getString(R.string.server_url);
+
+        HttpGet httpGet = new HttpGet(rootUrl + "getBooksApi.php?email="+strEmail);
 
 //        String JsonBooks = MyHttpService.httpGet("https://bookgram.000webhostapp.com/app/getBooksApi.php?email="+strEmail);
 //        String JsonBooks = MyHttpService.httpGet("http://friendsfashion.net/android/book/getBooksApi.php?email="+strEmail);

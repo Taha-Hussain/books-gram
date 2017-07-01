@@ -33,7 +33,6 @@ public class LoginActivity extends AppCompatActivity {
 
     EditText mEditTextUserName;
     EditText mEditTextPassword;
-    RadioButton mRemember;
     SharedPreferences mSharedPreferences;
     String mUserName;
     String mPassword;
@@ -121,19 +120,29 @@ public class LoginActivity extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
             progressDialog.dismiss();
-            if (result.equals("200")) {
+//Un Comment This After Setting GCM ID
+//            if (result.equals("200")) {
+//                savePreferences();
+//                new asyncTask_httpfavCategoriesCount().execute();
+//            } else {
+//                showMessage("Invalid user/password");
+//            }
+//UnComment This After Setting GCM ID
+
+//Remove This After Setting GCM ID
                 savePreferences();
                 new asyncTask_httpfavCategoriesCount().execute();
-            } else {
-                showMessage("Invalid user/password");
-            }
+//Remove This After Setting GCM ID
 
         }
     }
 
     public String loginRequestToWebServer(String mUserName, String mPassword) {
-//        String url = "http://friendsfashion.net/android/book/login.php";
-        String url = "http://bookgram.000webhostapp.com/app/login.php";
+
+//      String url = "http://friendsfashion.net/android/book/login.php";
+//      String url = "http://bookgram.000webhostapp.com/app/login.php";
+        String rootUrl = getResources().getString(R.string.server_url);
+        String url = rootUrl + "login.php";
         String strResponse = "No response";
         HttpClient httpclient = new DefaultHttpClient();
         HttpPost httppost = new HttpPost(url);

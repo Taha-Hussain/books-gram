@@ -34,29 +34,20 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mEditTextName;
     EditText mEditTextPassword;
     EditText mEditTextEmail;
-
     String mUserName;
     String mPassword;
     String mEmail;
-
-    String mtype;
     Context context;
-    Spinner type;
     SharedPreferences mSharedPreferences;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         context = this;
-
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-
         mEditTextName = (EditText) findViewById(R.id.register_Textview_name);
         mEditTextEmail = (EditText) findViewById(R.id.register_Textview_email);
         mEditTextPassword = (EditText) findViewById(R.id.register_Textview_password);
-//        type = (Spinner) findViewById(R.id.spinner1);
-
-       // populate();
     }
 
     public boolean populate() {
@@ -67,13 +58,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         mEditTextName.setText(strUserName);
         mEditTextPassword.setText(strPassword);
-
-
         if (strPassword.length() > 0 && strUserName.length() > 0) {
-            //  Intent mintent = new Intent(context, CarListsActivity.class);
-            //startActivity(mintent);
             finish();
-
         } else {
             showMessage("Please Login ");
             return false;
@@ -88,7 +74,6 @@ public class RegisterActivity extends AppCompatActivity {
             mUserName = mEditTextName.getText().toString();
             mPassword = mEditTextPassword.getText().toString();
             mEmail = mEditTextEmail.getText().toString();
-//            mtype = type.getSelectedItem().toString();
 
             if (isNetworkConnected()) {
                 new RegisterActivity.asyncTask_RegisterRequest().execute();
@@ -117,7 +102,6 @@ public class RegisterActivity extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             progressDialog = ProgressDialog.show(RegisterActivity.this, "Sending...", "wait", true);
-
             super.onPreExecute();
         }
 
@@ -126,10 +110,7 @@ public class RegisterActivity extends AppCompatActivity {
             String msg = "";
             try {
                 if (mUserName.length() > -0 && mPassword.length() > -0) {
-
-
                     msg = loginRequestToWebServer(mUserName, mPassword,"2",mEmail);
-
                 }
             } catch (Exception ex) {
                 msg = "Error :" + ex.getMessage();
@@ -152,11 +133,8 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public String loginRequestToWebServer(String mUserName, String mPassword , String mtype, String mEmail) {
-
-//        String url = "http://friendsfashion.net/android/book/register.php";
-        String url = "http://bookgram.000webhostapp.com/app/register.php";
-
-
+        String rootUrl = getResources().getString(R.string.server_url);
+        String url = rootUrl + "register.php";
         String strResponse = "No response";
 
         HttpClient httpclient = new DefaultHttpClient();

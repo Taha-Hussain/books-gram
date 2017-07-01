@@ -3,6 +3,9 @@ package com.ticktech.booksgram.parser;
         import android.content.Context;
         import android.content.SharedPreferences;
         import android.preference.PreferenceManager;
+
+        import com.ticktech.booksgram.R;
+
         import org.apache.http.HttpResponse;
         import org.apache.http.NameValuePair;
         import org.apache.http.client.HttpClient;
@@ -24,7 +27,8 @@ public class InsertUpdateFavouriteGenresApi {
 
         HttpClient httpClient = new DefaultHttpClient();
 
-        HttpPost httpPost = new HttpPost("http://192.168.8.103:81/CheckBoxListView/insertUpdateFavouriteCategories.php");
+        String rootUrl = context.getResources().getString(R.string.server_url);
+        HttpPost httpPost = new HttpPost(rootUrl+"insertUpdateFavouriteCategories.php");
         try {
 
             ArrayList<NameValuePair> nameValuePairs= new ArrayList<NameValuePair>();

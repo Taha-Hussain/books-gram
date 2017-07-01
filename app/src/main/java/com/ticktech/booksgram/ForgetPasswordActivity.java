@@ -115,8 +115,9 @@ public class ForgetPasswordActivity extends AppCompatActivity {
 
     public String loginRequestToWebServer(String mEmail) {
 
-        String url = "http://bookgram.000webhostapp.com/app/forgetPassword.php";
-//      String url = "http://friendsfashion.net/android/book/forgetPassword.php";
+
+        String rootUrl = getResources().getString(R.string.server_url);
+        String url = rootUrl+"forgetPassword.php";
         String strResponse = "No response";
 
         HttpClient httpclient = new DefaultHttpClient();
